@@ -13,14 +13,14 @@ def string_to_time(time):
     return [datetime.datetime.strptime(times[0], '%H:%M'), datetime.datetime.strptime(times[1], '%H:%M')]
 
 
-class CouriersListView(generics.ListAPIView):
-    serializer_class = CouriersDetailSerializer
-    queryset = Courier.objects.all()
-
-
-class OrdersListView(generics.ListAPIView):
-    serializer_class = OrderDetailSerializer
-    queryset = Order.objects.all()
+# class CouriersListView(generics.ListAPIView):
+#     serializer_class = CouriersDetailSerializer
+#     queryset = Courier.objects.all()
+#
+#
+# class OrdersListView(generics.ListAPIView):
+#     serializer_class = OrderDetailSerializer
+#     queryset = Order.objects.all()
 
 
 @api_view(['POST'])
