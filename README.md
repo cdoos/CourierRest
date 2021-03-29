@@ -17,3 +17,5 @@ pip install psycopg2-binary
 ./manage.py migrate
 ```
 5. Запустить сервис: ```./manage.py runserver```
+# Тесты
+Для запуска тестов введите комманду: ```./manage.py test couriers```
