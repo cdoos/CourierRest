@@ -178,19 +178,22 @@ def order_assign(request):
                 if ok:
                     break
     response = OrderedDict()
+    response['orders'] = []
     if not orders_exist:
         if len(courier.assigned_orders) > 0:
-            response['orders'] = courier.assigned_orders
+            for order in courier.assigned_orders:
+                id_order = OrderedDict()
+                id_order['id'] = order
+                response['orders'].append(id_order)
             response['assign_time'] = time_now
             courier.assigned_time = time_now
-        else:
-            response['orders'] = []
     else:
         if len(courier.assigned_orders) > 0:
-            response['orders'] = courier.assigned_orders
+            for order in courier.assigned_orders:
+                id_order = OrderedDict()
+                id_order['id'] = order
+                response['orders'].append(id_order)
             response['assign_time'] = courier.assigned_time
-        else:
-            response['orders'] = []
     courier.save()
     return Response(response, status=status.HTTP_200_OK)
 
@@ -216,9 +219,9 @@ def order_complete(request):
             if courier.courier_type == 'foot':
                 courier.earnings = courier.earnings + 500 * 2
             elif courier.courier_type == 'bike':
-                courier.courier = courier.earnings + 500 * 5
-            else:
-                courier.courier = courier.earnings + 500 * 9
+                courier.earnings = courier.earnings + 500 * 5
+            elif courier.courier_type == 'car':
+                courier.earnings = courier.earnings + 500 * 9
             courier.save()
             response = OrderedDict()
             response['order_id'] = order_id
